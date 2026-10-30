@@ -413,13 +413,16 @@ body.is-locked { overflow: hidden; }
   .dock { top: auto; bottom: 16px; transform: translateY(16px); right: 12px; opacity: 0; pointer-events: none; transition: opacity 500ms var(--ease), transform 620ms var(--ease); }
   .is-past .dock { opacity: 1; transform: none; pointer-events: auto; }
   .modal { padding: 0; place-items: end center; }
-  .calc { border-radius: 24px 24px 0 0; max-height: 94svh; }
+  /* Без размытия: на телефоне его перерисовка при каждом нажатии дёргает экран */
+  .modal__backdrop { background: rgba(20, 33, 61, .55); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .calc { border-radius: 24px 24px 0 0; max-height: 94svh; overscroll-behavior: contain; overflow-anchor: none; filter: none; }
   .calc__mini {
     position: sticky; bottom: 12px; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding: 8px 8px 8px 20px; border-radius: 999px; background: rgba(255, 255, 255, .92); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    padding: 8px 8px 8px 20px; border-radius: 999px; background: #fff;
     box-shadow: 0 12px 40px -12px rgba(20, 33, 61, .45);
   }
-  .calc__mini b { font-weight: 300; font-size: 22px; letter-spacing: -0.02em; white-space: nowrap; }
+  .calc__mini b { font-weight: 300; font-size: 22px; letter-spacing: -0.02em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .tile-pick:hover .tile-pick__in, .tile-pick:hover img, .chip span:hover, .step-btn:hover { transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition-delay: 0ms !important; animation-duration: 1ms !important; }
